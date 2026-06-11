@@ -6,6 +6,13 @@ forecasts the next print, with a transparent explanation of *why*.
 
 ## Quickstart
 
+Clone the repo and enter the project folder:
+
+```bash
+git clone https://github.com/joshiraunak-josh/adp-ner-forecaster.git
+cd adp-ner-forecaster
+```
+
 **Requires Python 3.10+.** Use `python3` on macOS/Linux; on Windows use `python`.
 Run all commands from the project root (the folder that contains `adp_forecast/`).
 No dependencies and no API key — it runs offline against a committed data snapshot.
