@@ -4,16 +4,19 @@ A small command-line tool that tracks the monthly [ADP National Employment
 Report](https://adpemploymentreport.com/) (the private-sector jobs number) and
 forecasts the next print, with a transparent explanation of *why*.
 
-```bash
-# no dependencies, no API key, runs offline against a committed data snapshot
-python -m adp_forecast.cli history --last 12   # recent historical prints
-python -m adp_forecast.cli predict             # next-month forecast + reasoning
-python -m adp_forecast.cli backtest            # how every model scores
-python -m adp_forecast.cli refresh             # re-pull live data from FRED
-python -m unittest discover -s tests           # tests (offline)
-```
+## Quickstart
 
-Python 3.10+. Standard library only.
+**Requires Python 3.10+.** Use `python3` on macOS/Linux; on Windows use `python`.
+Run all commands from the project root (the folder that contains `adp_forecast/`).
+No dependencies and no API key — it runs offline against a committed data snapshot.
+
+```bash
+python3 -m adp_forecast.cli history --last 12   # recent historical prints
+python3 -m adp_forecast.cli predict             # next-month forecast + reasoning
+python3 -m adp_forecast.cli backtest            # how every model scores
+python3 -m adp_forecast.cli refresh             # re-pull live data from FRED
+python3 -m unittest discover -s tests           # tests (offline)
+```
 
 ---
 
@@ -36,9 +39,9 @@ truth; FRED is the clean transport. *Tradeoff:* a small dependency on FRED mirro
 the series promptly (it does, within the release day).
 
 **Target = first difference of the level.** FRED carries the *level* of total private
-employment (persons); the famous headline ("+122K in May") is the month-over-month
-change, so the tool differences the level. Verified against ADP press releases
-(May 2026 = 132,624 − 132,502 = +122K; Dec 2025 = +37K).
+employment (persons); the headline number everyone quotes ("+122K in May") is the
+month-over-month change, so the tool differences the level. Verified against ADP press
+releases (May 2026 = 132,624 − 132,502 = +122K; Dec 2025 = +37K).
 
 **Offline-first.** A committed snapshot (`data/adp_ner_level.csv`, 2010–2026) means
 `clone and run` needs no network. `refresh` re-pulls the live series and overwrites it.
@@ -73,6 +76,9 @@ this). Metrics: **MAE** and **RMSE** (thousands of jobs), **MASE** (MAE ÷ naive
 | historical_mean | 144.2 | 301.0 | 1.71 | 88% |
 | moving_avg_12 | 146.1 | 281.4 | 1.73 | 88% |
 | seasonal_naive | 208.7 | 411.7 | 2.47 | 83% |
+
+*(Numbers are from the committed snapshot; run `refresh` then `backtest` to regenerate
+against the latest data.)*
 
 **What this means (the honest read):**
 
