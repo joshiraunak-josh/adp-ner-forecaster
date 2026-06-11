@@ -10,12 +10,19 @@ forecasts the next print, with a transparent explanation of *why*.
 Run all commands from the project root (the folder that contains `adp_forecast/`).
 No dependencies and no API key — it runs offline against a committed data snapshot.
 
+The commands:
+- `history --last 12` — recent historical prints
+- `predict` — next-month forecast with reasoning
+- `backtest` — how every model scores
+- `refresh` — re-pull live data from FRED
+- `unittest discover -s tests` — run the tests (offline)
+
 ```bash
-python3 -m adp_forecast.cli history --last 12   # recent historical prints
-python3 -m adp_forecast.cli predict             # next-month forecast + reasoning
-python3 -m adp_forecast.cli backtest            # how every model scores
-python3 -m adp_forecast.cli refresh             # re-pull live data from FRED
-python3 -m unittest discover -s tests           # tests (offline)
+python3 -m adp_forecast.cli history --last 12
+python3 -m adp_forecast.cli predict
+python3 -m adp_forecast.cli backtest
+python3 -m adp_forecast.cli refresh
+python3 -m unittest discover -s tests
 ```
 
 ---
